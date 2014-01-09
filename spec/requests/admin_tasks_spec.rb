@@ -45,5 +45,13 @@ describe "AdminTasks" do
 		page.should have_content "Successfully deleted transfer"
 	end
 
+	it "transfer must be less than the remaining value in store" do
+		visit admin_tasks_path
+		fill_in "admin_task_money", :with => @transfer.available_money + 1
+		fill_in 'admin_task_company', :with => "Subway"
+		page.should have_content "Money transfer cannot exceed remaining balance"
+		
+	end
+
   end
 end
