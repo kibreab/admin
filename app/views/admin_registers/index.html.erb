@@ -1,0 +1,16 @@
+<h1>AdminRegister#index</h1>
+<p>please register or sign in' </p>
+
+<% if flash[:error] %>
+	<div style="color:red"><%= flash[:error] %></div>
+<% end %>
+
+<%= form_for @admin do |f| %>
+	<%= f.label :user_name %>
+	<%= f.text_field :user_name %>
+
+	<%= f.label :password %>
+	<%= f.text_field :password %>
+	<%= f.submit 'sign in' %>
+
+<% end %>

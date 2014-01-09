@@ -1,0 +1,2 @@
+module AdminRegisterHelper
+end

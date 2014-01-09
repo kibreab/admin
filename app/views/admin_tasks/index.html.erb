@@ -1,0 +1,44 @@
+<h1>
+Welcome administrator
+</h1>
+<%= link_to 'Sign out', '/admin_tasks/sign_out' %>
+
+Transfer the money amount to the company you wished
+<% if flash[:error] %>
+	<div style="color:red"><%= flash[:error] %></div>
+<% else flash[:success] %>
+	<div style="color:green"><%= flash[:success] %></div>
+<% end %>
+
+<%= form_for @admin_task do |f| %>
+	<% code = 'code' %>
+	<%= f.label :money %>
+	<%= f.text_field :money %>
+
+	<%= f.label :company %>
+	<%= f.text_field :company %>
+
+	<%= f.submit 'save' %>
+
+<% end %>
+
+<div style="padding:15px;">
+	<table style="border:1px solid #ccc;">
+	List of transfers
+	<tr>
+		<th>Company</th>
+		<th>Money</th>
+	</tr>
+<% @transfers.each do |t| %>	
+	<tr>
+		<td><%= t.company %></td>
+		<td><%= t.money %></td>
+		<td id='task_<%= t.id %>'><%= link_to 'Delete', admin_task_path(t), :method => :delete %></td>
+	</tr>
+
+<% end %>
+</table>
+</div>
+<div>
+ Remaining money in store is: <b><%= @admin_task.available_money %></b>	
+</div>
